@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace org.neurul.Cortex.Client
+namespace org.neurul.Cortex.Client.In
 {
     public interface ITerminalClient
     {
