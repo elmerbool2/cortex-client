@@ -1,5 +1,5 @@
 ﻿using NLog;
-using org.neurul.Common.Http;
+using neurUL.Common.Http;
 using Polly;
 using Splat;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace org.neurul.Cortex.Client.In
+namespace neurUL.Cortex.Client.In
 {
     public class HttpNeuronClient : INeuronClient
     {
@@ -18,7 +18,7 @@ namespace org.neurul.Cortex.Client.In
             .WaitAndRetryAsync(
                 3,
                 attempt => TimeSpan.FromMilliseconds(100 * Math.Pow(2, attempt)),
-                (ex, _) => HttpNeuronClient.logger.Error(ex, "Error occurred while communicating with Neurul Cortex. " + ex.InnerException?.Message)
+                (ex, _) => HttpNeuronClient.logger.Error(ex, "Error occurred while communicating with neurUL Cortex. " + ex.InnerException?.Message)
             );
 
         private static readonly string neuronsPath = "cortex/neurons/";

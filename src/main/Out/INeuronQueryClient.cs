@@ -1,9 +1,9 @@
-﻿using org.neurul.Cortex.Common;
+﻿using neurUL.Cortex.Common;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace org.neurul.Cortex.Client.Out
+namespace neurUL.Cortex.Client.Out
 {
     public interface INeuronQueryClient
     {

@@ -1,8 +1,8 @@
-﻿using org.neurul.Cortex.Common;
+﻿using neurUL.Cortex.Common;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace org.neurul.Cortex.Client.In
+namespace neurUL.Cortex.Client.In
 {
     public interface ITerminalClient
     {
