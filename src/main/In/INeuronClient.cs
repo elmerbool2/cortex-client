@@ -8,8 +8,8 @@ namespace neurUL.Cortex.Client.In
 {
     public interface INeuronClient
     {
-        Task CreateNeuron(string avatarUrl, string id, string authorId, CancellationToken token = default(CancellationToken));
+        Task CreateNeuron(string cortexInBaseUrl, string id, string authorId, CancellationToken token = default(CancellationToken));
 
-        Task DeactivateNeuron(string avatarUrl, string id, int expectedVersion, string authorId, CancellationToken token = default(CancellationToken));
+        Task DeactivateNeuron(string cortexInBaseUrl, string id, int expectedVersion, string authorId, CancellationToken token = default(CancellationToken));
     }
 }

@@ -7,6 +7,6 @@ namespace neurUL.Cortex.Client.Out
 {
     public interface INeuronQueryClient
     {
-        Task<NeuronData> GetNeuronById(string avatarId, Guid id, CancellationToken token = default(CancellationToken)); 
+        Task<NeuronData> GetNeuronById(string cortexOutBaseUrl, Guid id, CancellationToken token = default(CancellationToken)); 
     }
 }
