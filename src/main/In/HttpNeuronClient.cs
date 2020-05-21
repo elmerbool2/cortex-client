@@ -30,11 +30,11 @@ namespace neurUL.Cortex.Client.In
             this.requestProvider = requestProvider ?? Locator.Current.GetService<IRequestProvider>();
         }
 
-        public async Task CreateNeuron(string avatarUrl, string id, string authorId, CancellationToken token = default(CancellationToken)) =>
+        public async Task CreateNeuron(string cortexInBaseUrl, string id, string authorId, CancellationToken token = default(CancellationToken)) =>
             await HttpNeuronClient.exponentialRetryPolicy.ExecuteAsync(
-                async () => await this.CreateNeuronInternal(avatarUrl, id, authorId, token).ConfigureAwait(false));
+                async () => await this.CreateNeuronInternal(cortexInBaseUrl, id, authorId, token).ConfigureAwait(false));
 
-        private async Task CreateNeuronInternal(string avatarUrl, string id, string authorId, CancellationToken token = default(CancellationToken))
+        private async Task CreateNeuronInternal(string cortexInBaseUrl, string id, string authorId, CancellationToken token = default(CancellationToken))
         {
             var data = new
             {
@@ -43,20 +43,25 @@ namespace neurUL.Cortex.Client.In
             };
 
             await this.requestProvider.PostAsync(
-               $"{avatarUrl}{HttpNeuronClient.neuronsPath}",
+               $"{cortexInBaseUrl}{HttpNeuronClient.neuronsPath}",
                data
                );
         }
 
-        public async Task DeactivateNeuron(string avatarUrl, string id, int expectedVersion, string authorId, CancellationToken token = default(CancellationToken)) =>
+        public async Task DeactivateNeuron(string cortexInBaseUrl, string id, int expectedVersion, string authorId, CancellationToken token = default(CancellationToken)) =>
             await HttpNeuronClient.exponentialRetryPolicy.ExecuteAsync(
-                async () => await this.DeactivateNeuronInternal(avatarUrl, id, expectedVersion, authorId, token));
+                async () => await this.DeactivateNeuronInternal(cortexInBaseUrl, id, expectedVersion, authorId, token));
 
-        private async Task DeactivateNeuronInternal(string avatarUrl, string id, int expectedVersion, string authorId, CancellationToken token = default(CancellationToken))
+        private async Task DeactivateNeuronInternal(string cortexInBaseUrl, string id, int expectedVersion, string authorId, CancellationToken token = default(CancellationToken))
         {
+            var data = new
+            {
+                AuthorId = authorId
+            };
+
             await this.requestProvider.DeleteAsync<object>(
-               $"{avatarUrl}{string.Format(HttpNeuronClient.neuronsPathTemplate, id)}",
-               null,               
+               $"{cortexInBaseUrl}{string.Format(HttpNeuronClient.neuronsPathTemplate, id)}",
+               data,
                token: token,
                headers: new KeyValuePair<string, string>("ETag", expectedVersion.ToString())
                );
